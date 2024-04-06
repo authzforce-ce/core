@@ -162,14 +162,12 @@ limitations under the License.
                                 </AttributeSelector>
                             </Apply>
                         </VariableDefinition>
-                        <VariableDefinition VariableId="subject_classif_level">
-                            <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only">
+                        <VariableDefinition VariableId="subject_classif_levels">
                                 <AttributeSelector Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject"
                                                    DataType="http://www.w3.org/2001/XMLSchema#integer"
                                                    MustBePresent="true"
                                                    Path="{$classif_name_to_level_xpath}">
                                 </AttributeSelector>
-                            </Apply>
                         </VariableDefinition>
 
                         <xsl:for-each select="//spif:securityCategoryTag">
@@ -203,9 +201,10 @@ limitations under the License.
                                                 <VariableReference VariableId="action_id"/>
                                                 <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">READ</AttributeValue>
                                             </Apply>
-                                            <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-greater-than-or-equal">
-                                                <VariableReference VariableId="subject_classif_level"/>
+                                            <Apply FunctionId="urn:oasis:names:tc:xacml:3.0:function:any-of">
+                                                <Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-less-than-or-equal" />
                                                 <VariableReference VariableId="resource_classif_level"/>
+                                                <VariableReference VariableId="subject_classif_levels"/>
                                             </Apply>
                                         </Apply>
                                         <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and">
@@ -213,9 +212,10 @@ limitations under the License.
                                                 <VariableReference VariableId="action_id"/>
                                                 <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">WRITE</AttributeValue>
                                             </Apply>
-                                            <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-less-than-or-equal">
-                                                <VariableReference VariableId="subject_classif_level"/>
+                                            <Apply FunctionId="urn:oasis:names:tc:xacml:3.0:function:any-of">
+                                                <Function FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-greater-than-or-equal" />
                                                 <VariableReference VariableId="resource_classif_level"/>
+                                                <VariableReference VariableId="subject_classif_levels"/>
                                             </Apply>
                                         </Apply>
                                     </Apply>
