@@ -41,7 +41,7 @@
 				<!-- Needed for org.springframework.util.ResourceUtils,SystemPropertyUtils,FileCopyUtils, etc. -->
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
-				<version>6.0.18</version>
+				<version>6.1.14</version>
 			</dependency>
 			<!-- FIX CVE-2023-6378 -->
 			<dependency>
